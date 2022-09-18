@@ -1,7 +1,8 @@
+import { useState } from "react";
+
 import "./App.css";
 import NewExpenses from "./components/NewExpenses/NewExpenses";
 import Expenses from "./components/Expense/Expenses";
-import { useState } from "react";
 
 const DUMMY_EXP = [
   {
@@ -43,11 +44,18 @@ function App() {
     });
   };
 
+  const deleteItemHandler = (deletedIndex) => {
+    expenses.splice(deletedIndex, 1);
+    setExpenses((items) => {
+      return [...items];
+    });
+  };
+
   return (
     <div>
       <h1>My Todos</h1>
       <NewExpenses newExpenses={newExpenses} />
-      <Expenses items={expenses} /*deleteItemHandler={deleteItemHandler}*/ />
+      <Expenses items={expenses} deleteItemHandler={deleteItemHandler} />
     </div>
   );
 }

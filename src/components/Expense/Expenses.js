@@ -1,19 +1,14 @@
-import { useState } from "react";
-
 import Card from "../UI/Card";
 import ExpenseItems from "./ExpenseItems";
 
 const Expenses = (props) => {
-  const [expensesData, setExpensesData] = useState(props.items);
+  const expensesData = props.items;
 
   const findDeleteItem = (itemId) => {
     for (const key of expensesData) {
       if (key.id === itemId) {
         let deletedIndex = expensesData.indexOf(key);
-        expensesData.splice(deletedIndex, 1);
-        setExpensesData((items) => {
-          return [...items];
-        });
+        props.deleteItemHandler(deletedIndex);
       }
     }
   };
